@@ -222,8 +222,9 @@ frontend:
 metadata:
   created_by: "testing_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
   run_ui: true
+  external_url_issue: "External URL https://rqr4x04-3000.preview.emergentagent.com returns 404, but localhost:3000 works perfectly"
 
 test_plan:
   current_focus: []
