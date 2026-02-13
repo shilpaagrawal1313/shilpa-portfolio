@@ -9,25 +9,13 @@ const ProjectsPage = () => {
   const [setAcadRef, isAcadVisible] = useMultipleScrollReveal(academicProjects.length);
 
   return (
-    <main className="pt-20 md:pt-24">
-      {/* Header Section */}
-      <section className="bg-navy-800 py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Project Showcase
-          </h1>
-          <p className="text-lg text-blue-200 max-w-2xl mx-auto">
-            A collection of impactful projects demonstrating expertise in project management, data analytics, and business strategy.
-          </p>
-        </div>
-      </section>
-
-      {/* Professional Projects */}
-      <section className="py-16 md:py-20 bg-white">
+    <main className="pt-24 md:pt-28">
+      {/* Professional Projects - No hero banner, starts directly with content */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             ref={headerRef}
-            className={`text-3xl md:text-4xl font-bold text-navy-800 mb-10 scroll-reveal ${headerVisible ? 'visible' : ''}`}
+            className={`text-3xl md:text-4xl font-bold text-navy-800 mb-10 fade-slide-up ${headerVisible ? 'visible' : ''}`}
           >
             Professional Projects
           </h2>
@@ -37,12 +25,12 @@ const ProjectsPage = () => {
               <div
                 key={project.id}
                 ref={setProfRef(index)}
-                className={`scroll-reveal stagger-${index + 1} ${isProfVisible(index) ? 'visible' : ''}`}
+                className={`experience-row stagger-${index + 1} ${isProfVisible(index) ? 'visible' : ''}`}
               >
-                <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Card className="overflow-hidden shadow-lg card-hover-lift">
                   <div className="grid md:grid-cols-5 gap-0">
                     {/* Left: Image */}
-                    <div className="md:col-span-2 h-56 md:h-auto">
+                    <div className={`md:col-span-2 h-56 md:h-auto overflow-hidden image-reveal ${isProfVisible(index) ? 'visible' : ''}`}>
                       <img
                         src={project.image}
                         alt={project.name}
@@ -51,7 +39,7 @@ const ProjectsPage = () => {
                     </div>
 
                     {/* Right: Content */}
-                    <div className="md:col-span-3 p-6 md:p-8">
+                    <div className={`md:col-span-3 p-6 md:p-8 content-reveal ${isProfVisible(index) ? 'visible' : ''}`}>
                       <h3 className="text-2xl md:text-3xl font-bold text-navy-800 mb-2">
                         {project.name}
                       </h3>
@@ -71,7 +59,7 @@ const ProjectsPage = () => {
       </section>
 
       {/* Academic Projects */}
-      <section className="py-16 md:py-20 bg-gray-50">
+      <section className="py-12 md:py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-navy-800 mb-10">
             Academic Projects
@@ -82,7 +70,7 @@ const ProjectsPage = () => {
               <Card
                 key={project.id}
                 ref={setAcadRef(index)}
-                className={`overflow-hidden card-hover scroll-reveal-scale stagger-${index + 1} ${isAcadVisible(index) ? 'visible' : ''}`}
+                className={`overflow-hidden card-hover-lift card-scale-in stagger-${index + 1} ${isAcadVisible(index) ? 'visible' : ''}`}
               >
                 <div className="h-48 overflow-hidden">
                   <img

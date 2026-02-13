@@ -8,33 +8,21 @@ const ExperiencePage = () => {
   const [setRef, isVisible] = useMultipleScrollReveal(workExperience.length);
 
   return (
-    <main className="pt-20 md:pt-24">
-      {/* Header Section */}
-      <section className="bg-navy-800 py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Work Experience
-          </h1>
-          <p className="text-lg text-blue-200 max-w-2xl mx-auto">
-            A journey of continuous growth through diverse roles in project management, business analysis, and technology.
-          </p>
-        </div>
-      </section>
-
-      {/* Experience Cards */}
-      <section className="py-16 md:py-24 bg-white">
+    <main className="pt-24 md:pt-28">
+      {/* Experience Cards - No hero banner, starts directly with content */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-12 md:space-y-16">
+          <div className="space-y-10 md:space-y-12">
             {workExperience.map((experience, index) => (
               <div
                 key={experience.id}
                 ref={setRef(index)}
-                className={`scroll-reveal stagger-${index + 1} ${isVisible(index) ? 'visible' : ''}`}
+                className={`experience-row stagger-${index + 1} ${isVisible(index) ? 'visible' : ''}`}
               >
-                <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Card className="overflow-hidden shadow-lg card-hover-lift">
                   <div className="grid md:grid-cols-5 gap-0">
-                    {/* Left: Image */}
-                    <div className="md:col-span-2 h-56 md:h-auto">
+                    {/* Left: Image with stagger animation */}
+                    <div className={`md:col-span-2 h-56 md:h-auto overflow-hidden image-reveal ${isVisible(index) ? 'visible' : ''}`}>
                       <img
                         src={experience.logo}
                         alt={experience.company}
@@ -42,8 +30,8 @@ const ExperiencePage = () => {
                       />
                     </div>
 
-                    {/* Right: Content */}
-                    <div className="md:col-span-3 p-6 md:p-8">
+                    {/* Right: Content with stagger animation */}
+                    <div className={`md:col-span-3 p-6 md:p-8 content-reveal ${isVisible(index) ? 'visible' : ''}`}>
                       <h2 className="text-2xl md:text-3xl font-bold text-navy-800 mb-2">
                         {experience.role}
                       </h2>

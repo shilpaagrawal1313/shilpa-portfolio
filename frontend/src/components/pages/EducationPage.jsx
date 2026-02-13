@@ -8,28 +8,16 @@ const EducationPage = () => {
   const [setRef, isVisible] = useMultipleScrollReveal(education.length);
 
   return (
-    <main className="pt-20 md:pt-24">
-      {/* Header Section */}
-      <section className="bg-navy-800 py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Education
-          </h1>
-          <p className="text-lg text-blue-200 max-w-2xl mx-auto">
-            A strong foundation in business, technology, and management built through rigorous academic programs.
-          </p>
-        </div>
-      </section>
-
-      {/* Education Cards */}
-      <section className="py-16 md:py-24 bg-white">
+    <main className="pt-24 md:pt-28">
+      {/* Education Cards - No hero banner, starts directly with content */}
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-10">
+          <div className="space-y-8">
             {education.map((edu, index) => (
               <Card
                 key={edu.id}
                 ref={setRef(index)}
-                className={`p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 scroll-reveal stagger-${index + 1} ${isVisible(index) ? 'visible' : ''}`}
+                className={`p-8 md:p-10 shadow-lg card-hover-lift card-scale-in stagger-${index + 1} ${isVisible(index) ? 'visible' : ''}`}
               >
                 {/* Degree Title */}
                 <div className="flex items-start gap-4 mb-4">
@@ -75,7 +63,7 @@ const EducationPage = () => {
                       {edu.coursework.map((course, i) => (
                         <span
                           key={i}
-                          className="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full text-sm"
+                          className="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full text-sm hover:bg-gray-200 transition-colors"
                         >
                           {course}
                         </span>

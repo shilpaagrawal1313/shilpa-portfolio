@@ -102,11 +102,39 @@ html {
   background-color: #152a45;
 }
 
-/* Scroll reveal animations */
+/* ===== ENHANCED ANIMATIONS ===== */
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fade + Slide Up animation (subtle 12-16px) */
+.fade-slide-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-slide-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scroll reveal animations - improved */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .scroll-reveal.visible {
@@ -114,10 +142,64 @@ html {
   transform: translateY(0);
 }
 
+/* Scale-in animation for cards (0.98 -> 1.0) */
+.card-scale-in {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-scale-in.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Experience row animation container */
+.experience-row {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.experience-row.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image reveal with stagger (animates first) */
+.image-reveal {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s, 
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s;
+}
+
+.image-reveal.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Content reveal with stagger (animates after image) */
+.content-reveal {
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s, 
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
+}
+
+.content-reveal.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Legacy scroll-reveal-scale for compatibility */
 .scroll-reveal-scale {
   opacity: 0;
-  transform: translateY(30px) scale(0.95);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(12px) scale(0.98);
+  transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .scroll-reveal-scale.visible {
@@ -125,17 +207,31 @@ html {
   transform: translateY(0) scale(1);
 }
 
-/* Staggered animations */
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-.stagger-6 { transition-delay: 0.6s; }
+/* Staggered animations - slightly faster for snappier feel */
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.15s; }
+.stagger-4 { transition-delay: 0.2s; }
+.stagger-5 { transition-delay: 0.25s; }
+.stagger-6 { transition-delay: 0.3s; }
 
-/* Card hover effects */
+/* ===== HOVER EFFECTS ===== */
+
+/* Card hover - lift + shadow increase */
+.card-hover-lift {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Legacy card-hover for compatibility */
 .card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .card-hover:hover {
@@ -143,12 +239,27 @@ html {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
-/* Button hover effects */
+/* Button hover - lift + shadow */
 .btn-lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .btn-lift:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-lift:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Respect reduced motion for hover effects too */
+@media (prefers-reduced-motion: reduce) {
+  .card-hover-lift:hover,
+  .card-hover:hover,
+  .btn-lift:hover {
+    transform: none;
+  }
 }
