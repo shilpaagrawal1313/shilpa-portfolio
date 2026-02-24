@@ -65,6 +65,26 @@ const webpackConfig = {
       if (config.enableHealthCheck && healthPluginInstance) {
         webpackConfig.plugins.push(healthPluginInstance);
       }
+            // Netlify production build fix:
+      // Remove react-refresh/babel if it gets injected by any plugin/config
+      if (process.env.NODE_ENV === "production") {
+        const oneOfRule = webpackConfig.module.rules.find((r) => Array.isArray(r.oneOf));
+        if (oneOfRule) {
+          oneOfRule.oneOf.forEach((rule) => {
+            if (
+              rule.loader &&
+              rule.loader.includes("babel-loader") &&
+              rule.options &&
+              rule.options.plugins
+            ) {
+              rule.options.plugins = rule.options.plugins.filter((p) => {
+                const name = Array.isArray(p) ? p[0] : p;
+                return name !== "react-refresh/babel";
+              });
+            }
+          });
+        }
+      }
       return webpackConfig;
     },
   },
