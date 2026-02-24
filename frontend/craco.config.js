@@ -91,11 +91,17 @@ const webpackConfig = {
 };
 
 // Only add babel metadata plugin during dev server
-if (config.enableVisualEdits && babelMetadataPlugin) {
-  webpackConfig.babel = {
-    plugins: [babelMetadataPlugin],
-  };
-}
+// Babel plugins:
+// - In production (Netlify build), force react-refresh env check to be skipped if present
+// - In dev server, keep emergent visual-edits metadata plugin
+webpackConfig.babel = {
+  plugins: [
+    ...(process.env.NODE_ENV === "production"
+      ? [["react-refresh/babel", { skipEnvCheck: true }]]
+      : []),
+    ...(config.enableVisualEdits && babelMetadataPlugin ? [babelMetadataPlugin] : []),
+  ],
+};
 
 webpackConfig.devServer = (devServerConfig) => {
   // Apply visual edits dev server setup only if enabled
